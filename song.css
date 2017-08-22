@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*::after,*::before{
+    box-sizing: border-box;
+}
+.page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: transparent  url(http://p3.music.126.net/f46xGM5jH_O1q1XXYn_W5Q==/18362943696258937.jpg)  no-repeat  center;
+    background-size: cover;
+}
+.disc-container{
+    position: relative;
+}
+.disc-container .pointer{
+    width: 24vw;
+    position: absolute;
+    left: 50%;
+}
+
+.disc-container .ring{
+    width: 72vw;
+}
+.disc-container .light{
+    width: 72vw;
+}
+.song-description{
+
+}
+
+.page > .links{
+
+}
