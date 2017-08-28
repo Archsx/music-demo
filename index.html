@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>my netease-cloud-music</title>
+    <link rel="stylesheet" type="" href="./vendors/loaders.min.css">
     <style>
         * {
             margin: 0;
@@ -191,7 +192,7 @@
             height: 160%;
             width: 4px;
             background: #d43c33;
-            top: 2px;
+            top: 1px;
             left: 0;
             transform: scale(0.5);
             transform-origin: 0 0;
@@ -398,6 +399,9 @@
             width: 100%;
             z-index: 10;
         }  
+        .line-scale-pulse-out{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -534,8 +538,9 @@
                     </div>
                     <div class="newSongs">
                         <h2 class="title">最新音乐</h2>
+                        <div class="line-scale-pulse-out" id="loading"><div></div><div></div><div></div><div></div><div></div></div>
                         <ol>
-                            <li>
+                            <!-- <li>
                                 <div class="songInfo">
                                     <div class="songName">
                                         <p>Look What You Made Me Do</p>
@@ -714,7 +719,7 @@
                                         <use xlink:href="#icon-play"></use>
                                     </svg>
                                 </div>
-                            </li>
+                            </li> -->
                     </div>
                     <div class="footer">
                         <div class="bottomLogo">
@@ -739,8 +744,8 @@
     </div>
 
     <script src="//at.alicdn.com/t/font_397633_n2c3erwoszdaq0k9.js"></script>
-    <script src="./vendors/jquery.min.js">
-    </script>
+    <script src="./vendors/jquery.min.js"></script>
+    <script src="./vendors/av-min.js"></script>
     <script>
         $('.tabs>ul').on('click', 'li', function (e) {
             let li = $(e.currentTarget);
@@ -749,7 +754,47 @@
             $('.tab-contents>ol>li').eq(index).addClass('active').siblings('.active').removeClass('active');
 
         })
-    </script>
+</script>
+<script>
+    var APP_ID = "97EYKfMN2Tvguso9HbXLbaaq-gzGzoHsz";
+    var APP_KEY = "RGQmBKaGRNNjneKu6nV5hODE";
+
+
+    AV.init({
+        appId: APP_ID,
+        appKey:APP_KEY
+    })
+    var query = new AV.Query('Song');
+    let $ol = $('.newSongs>ol')
+    query.find().then(function(results){
+        $('#loading').remove();
+        for(var i = 0;i < results.length;i++){
+            let song = results[i].attributes;
+            let li = `<li>
+                                <div class="songInfo">
+                                    <div class="songName">
+                                        <p>${song.name}</p>
+                                    </div>
+                                    <div class="singer">
+                                        <svg class="icon">
+                                         <use xlink:href="#icon-SQ"></use>
+                                        </svg>
+                                        ${song.singer}
+                                    </div>
+                                </div>
+                                <div class="play">
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-play"></use>
+                                    </svg>
+                                </div>
+                            </li>
+                    `
+           $ol.append(li)                 
+        }
+    },function(error){
+        throw new Error(error)
+    })
+</script>
 </body>
 
 </html>
