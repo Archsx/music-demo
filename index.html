@@ -119,13 +119,12 @@
             /* padding: 10px 0; */
             position: relative;
         }
-
         .tabs>ul>li>.wrap {
             display: inline-block;
             padding: 0 5px;
             position: relative;
             line-height: 40px;
-            top: 2px;
+            top: 1px;
             /* padding: 10px 0; */
         }
 
@@ -137,12 +136,11 @@
             content: '';
             position: absolute;
             width: 200%;
-            height: 3px;
+            height: 4px;
             background: #d33a31;
             transform: scale(0.5);
             transform-origin: 0 0;
-            /* top: 100%; top百分之百和bottom0是不一样的，这点很疑惑*/
-            bottom: 1px;
+            bottom: -1px;
             left: 0;
         }
         .tab-contents{
@@ -156,7 +154,7 @@
             display: block;
         }
 
-        .tab-contents>ol>li {
+        .tab-contents>ol>li.page1 {
             padding-top: 20px;
         }
 
@@ -402,6 +400,23 @@
         .line-scale-pulse-out{
             text-align: center;
         }
+        .input-wrapper{
+            /* line-height: 30px; */
+            text-align: center;
+            padding: 15px 10px;
+
+        }
+        .input-wrapper input{
+            line-height: 30px;
+            width: 100%;
+            display: block;
+            padding: 0 30px;
+            border: none;
+            background: #ebecec;
+            border-radius: 30px;
+            outline: transparent;
+        }
+  
     </style>
 </head>
 
@@ -479,7 +494,7 @@
         </div>
         <div class="tab-contents">
             <ol>
-                <li class="page1 active">
+                <li class="page1">
                     <div class="recommendedSongs">
                         <h2 class="title">推荐歌单</h2>
                         <div class="albums">
@@ -735,8 +750,18 @@
                     <li class="page2">
                         page2
                     </li>
-                    <li class="page3">
-                        page3
+                    <li class="page3 active">
+                        <div class="input-wrapper">
+                            <input type="text" name="" value="" placeholder="搜索歌曲、歌手、专辑">
+                        </div>
+                        <div class="hotAndHistory">
+                            <div class="hot">
+                                
+                            </div>
+                            <ol class="history">
+                                
+                            </ol>
+                        </div>
                     </li>
                     </ol>
         </div>
