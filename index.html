@@ -397,6 +397,20 @@
             width: 100%;
             z-index: 10;
         }  
+        /* .fixed::after{
+            content: '';
+            position: absolute;
+            border-color: #ccc;
+            width: 300%;
+            height: 300%;
+            transform: scale(.333333);
+            border: 0 solid rgba(0,0,0,.1);
+            border-bottom-width:1px;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0 ;
+
+        } */
         .line-scale-pulse-out{
             text-align: center;
         }
@@ -406,15 +420,56 @@
             padding: 15px 10px;
 
         }
-        .input-wrapper input{
+        .input-box {
             line-height: 30px;
-            width: 100%;
-            display: block;
             padding: 0 30px;
-            border: none;
             background: #ebecec;
             border-radius: 30px;
-            outline: transparent;
+
+        }
+        .input-wrapper input{
+             width: 100%; 
+             background: #ebecec;
+            /* display: block; */
+              border: none; 
+            outline: transparent; 
+        }
+        .input-box{
+            position: relative;
+        }
+
+        .input-box .search{
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
+            fill: #cbcbcc;
+        }
+        .input-box .close{
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 8px;
+            fill: #bcbdbd;
+            display: none;
+        }
+        .input-box .close.show{
+            display: block;
+        }
+        .input-box .holder{
+            position: absolute;
+            top: 0;
+            left: 30px;
+            font-size: 14px;
+            color: #c9c9c9;
+            background: transparent;
+        }
+        .input-box .holder.hide{
+            display: none;
         }
   
     </style>
@@ -752,7 +807,17 @@
                     </li>
                     <li class="page3 active">
                         <div class="input-wrapper">
-                            <input type="text" name="" value="" placeholder="搜索歌曲、歌手、专辑">
+                            <div class="input-box">
+                                <svg class="icon search">
+                                    <use xlink:href="#icon-search"></use>
+                                </svg>
+                                <input type="text" name="" value="" placeholder="">
+                                <label for="" class="holder">搜索歌曲、歌手、专辑</label>
+                                <svg class="icon close">
+                                    <use xlink:href="#icon-close"></use>
+                                </svg>
+                            </div>
+                            
                         </div>
                         <div class="hotAndHistory">
                             <div class="hot">
@@ -766,8 +831,7 @@
                     </ol>
         </div>
     </div>
-
-    <script src="//at.alicdn.com/t/font_397633_n2c3erwoszdaq0k9.js"></script>
+    <script src="//at.alicdn.com/t/font_397633_633aoixx7zht1emi.js"></script>
     <script src="./vendors/jquery.min.js"></script>
     <script src="./vendors/av-min.js"></script>
     <script>
