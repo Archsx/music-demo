@@ -397,7 +397,11 @@
             width: 100%;
             z-index: 10;
         }  
-        /* .fixed::after{
+
+        .tab-contents>ol{
+            position: relative;
+        }
+        .tab-contents>ol::before{
             content: '';
             position: absolute;
             border-color: #ccc;
@@ -405,12 +409,12 @@
             height: 300%;
             transform: scale(.333333);
             border: 0 solid rgba(0,0,0,.1);
-            border-bottom-width:1px;
+            border-top-width:1px;
             top: 0;
             left: 0;
             transform-origin: 0 0 ;
 
-        } */
+        }  
         .line-scale-pulse-out{
             text-align: center;
         }
@@ -462,14 +466,25 @@
         }
         .input-box .holder{
             position: absolute;
-            top: 0;
+            top: 5px;
             left: 30px;
             font-size: 14px;
+            line-height: 21px;
             color: #c9c9c9;
             background: transparent;
         }
         .input-box .holder.hide{
             display: none;
+        }
+        .hot{
+            padding: 15px 10px 0 10px;
+        }
+        .hot h3{
+            font-size: 12px;
+            line-height: 12px;
+              color: #666;  
+             /* color: red;  */
+            font-weight: 400;
         }
   
     </style>
@@ -478,7 +493,6 @@
 <body>
     <div class="page">
         <div class="fixed">
-            
         <div class="header">
             <div class="logo">
                 <svg class="topsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 284 50" data-reactid="6">
@@ -821,7 +835,14 @@
                         </div>
                         <div class="hotAndHistory">
                             <div class="hot">
-                                
+                                <h3>热门搜索</h3>
+                                <div class="aList">
+                                    <ul>
+                                       <li>
+                                           <a href="">那年花开月正圆</a>
+                                       </li>
+                                    </ul>
+                                </div>
                             </div>
                             <ol class="history">
                                 
@@ -831,7 +852,7 @@
                     </ol>
         </div>
     </div>
-    <script src="//at.alicdn.com/t/font_397633_633aoixx7zht1emi.js"></script>
+    <script src="//at.alicdn.com/t/font_397633_n26hgusikck57b9.js"></script>
     <script src="./vendors/jquery.min.js"></script>
     <script src="./vendors/av-min.js"></script>
     <script>
