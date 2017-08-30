@@ -344,7 +344,6 @@
             height: 300%;
             transform: scale(.333333);
             border: 0 solid rgba(0, 0, 0, .1);
-            border-color: #ccc;
             border-top-width: 1px;
             top: 0;
             left: 0;
@@ -452,6 +451,57 @@
             border-radius: 64px;
         }
 
-        .aList li>a {
+        .aList li a {
             color: #333;
+        }
+        .history>li{
+            display: flex;
+            align-items: center;
+        }
+        .icon-clock{
+            width: 1.072em;
+            height: 1.072em;
+            margin: 0 8.93px 0 8.93px;
+            fill: #cccdcd;
+        }
+        .close{
+            display: flex;
+            align-items: center;
+            padding-right: 9.011px;
+        }
+        .clock{
+            display: flex;
+            align-items: center;
+        }
+        .icon-close {
+       font-size: 26.4099px;
+       width: 1em; height: 1em;
+       fill: #aaa;
+        }
+        .searchHistoryContent{
+            line-height: 45px;
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+        }
+        .searchHistoryContent span{
+            flex-grow: 1;
+            line-height: 21px;
+            display: block;
+            padding: 12px 0;
+            color: #333;
+            white-space: nowrap;
+            word-break: normal;
+            font-size: 14px;
+        }
+        .searchHistoryContent ::after{
+            position: absolute;
+            content: '';
+            width: 300%;
+            height: 300%;
+            transform: scale(.3333333);
+            transform-origin: 0 0 ;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1)
         }
