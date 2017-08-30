@@ -345,9 +345,9 @@
                                 <svg class="icon search">
                                     <use xlink:href="#icon-search"></use>
                                 </svg>
-                                <input type="text" name="" value="" placeholder="">
-                                <label for="" class="holder">搜索歌曲、歌手、专辑</label>
-                                <svg class="icon clear">
+                                <input type="text" name="" value="" placeholder="" id="query">
+                                <label for="" class="holder show">搜索歌曲、歌手、专辑</label>
+                                <svg class="icon clear hide">
                                     <use xlink:href="#icon-clear"></use>
                                 </svg>
                             </div>
@@ -447,14 +447,24 @@
     <script src="./vendors/jquery.min.js"></script>
     <script src="./vendors/av-min.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/logic.js"></script>
     <script>
         $('.tabs>ul').on('click', 'li', function (e) {
             let li = $(e.currentTarget);
             let index = li.index();
             li.addClass('active').siblings('.active').removeClass('active');
             $('.tab-contents>ol>li').eq(index).addClass('active').siblings('.active').removeClass('active');
-
+            if(index == 2){
+                $('input#query').focus()
+            }
         })
+
+
+
+
+
+
+       
 </script>
 </body>
 

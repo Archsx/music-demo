@@ -397,7 +397,6 @@
             transform: translateY(-50%);
             right: 8px;
             fill: #bcbdbd;
-            display: none;
         }
 
 
@@ -409,6 +408,7 @@
             line-height: 21px;
             color: #c9c9c9;
             background: transparent;
+            pointer-events: none;
         }
 
 
