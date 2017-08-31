@@ -36,26 +36,26 @@
         }
 
         .header {
-            /* padding: 17px 10px; */
-            padding: 4.10628vw 2.415vw;
+             padding: 17px 10px; 
+            /* padding: 4.10628vw 2.415vw; */
         }
 
         .logo>svg {
-            /* width: 142px;
+             width: 142px;
+            height: 25px; 
+            /* width: 34.2995169vw;
             height: 25px; */
-            width: 34.2995169vw;
-            height: 25px;
             vertical-align: top;
         }
 
         .header>a {
             color: #fff;
-            /* font-size: 15px;
+             font-size: 15px;
                padding: 5px 10px;  
-               line-height: 20px;  */
-            font-size: 3.6231884vw;
+               line-height: 20px;  
+            /* font-size: 3.6231884vw;
             padding: 1.20772946vw 2.41545893vw;
-            line-height: 4.83091787vw;
+            line-height: 4.83091787vw; */
             position: relative;
             /* border-radius: 15px;   */
         }
@@ -370,7 +370,7 @@
         .input-wrapper input {
             width: 100%;
             background: #ebecec;
-         /* display: block; */
+           display: inline-block;  
             border: none;
             outline: transparent;
         }
@@ -398,11 +398,19 @@
             right: 8px;
             fill: #bcbdbd;
         }
-
+        .input-box input{
+              -webkit-appearance: none;  
+              cursor: auto;  
+              text-align: start;  
+              font-size: 14px;  
+        }
+         .input-box input:focus{
+              color: #000;  
+        } 
 
         .input-box .holder {
             position: absolute;
-            top: 5px;
+            top: 6px;
             left: 30px;
             font-size: 14px;
             line-height: 21px;
