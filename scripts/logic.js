@@ -15,6 +15,9 @@ function inputing() {
     $("svg.clear").removeClass("hide").addClass('show')
     $("label.holder").removeClass('show').addClass('hide')
 }
+function showSearchResultPageN(n){
+    $('.aboutSearch>ul>li').eq(n).removeClass('hide').addClass('show').siblings('.show').removeClass('show').addClass('hide')
+}
 
 $('.tabs>ul').on('click', 'li', function (e) {
     let li = $(e.currentTarget);
@@ -22,6 +25,7 @@ $('.tabs>ul').on('click', 'li', function (e) {
     li.addClass('active').siblings('.active').removeClass('active');
     $('.tab-contents>ol>li').eq(index).addClass('active').siblings('.active').removeClass('active');
     if (index == 2 && isNullCharacter()) {
+        showSearchResultPageN(0)
         $('input#query').focus()
     }
 })
@@ -34,17 +38,25 @@ $('input#query').on('focus', function (e) {
 })
 
 $('input#query').on('input', function (e) {
+    showSearchResultPageN(1)
     if (beginOrContinueInput) {
         inputing()
         beginOrContinueInput = false;
     }
     if (isNullCharacter()) {
+        showSearchResultPageN(0)
         reset()
         beginOrContinueInput = true;
     }
-    let $input = $(e.currentTarget)
+    var $input = $(e.currentTarget)
+    var value = $input.val()
+    if(value.trim()===''){
+        return;
+    }else{
+    $('.inputValue').html(`搜索"${value}"`)
+
+    }
     // let $input = $(this);
-    let value = $input.val()
 })
 
 $('input#query').on('blur', function () {
@@ -52,7 +64,43 @@ $('input#query').on('blur', function () {
 })
 
 $('svg.clear').on('click', function (e) {
+    showSearchResultPageN(0)
     $('input#query').val('')
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
+
+var request = (function(){
+    var intv;
+    var promise = Promise.resolve()
+    return function(value,n){
+       if(intv){
+           clearTimeout(intv)
+       }
+       intv =  setTimeout(function(){
+         intv = null;
+            promise = promise.then(function(){
+                return new Promise(function(resolve,reject){
+                    var songNameQuery = new AV.Query('Song');
+                    songNameQuery.contains('name',value);
+                    var singerNameQuery = new AV.Query('Song');
+                    singerNameQuery.contains('singer',value)
+                    var query = AV.Query.or(songNameQuery,singerNameQuery);
+                    query.select(['name','singer','url']);
+                    query.find().then(function(songs){
+                        songs.map(function(song){
+                            console.log(ele.attributes)
+
+
+
+
+                            resolve();
+                        })
+                    })
+
+                })
+            })
+       },n*1000)
+    }
+})()
+
