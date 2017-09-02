@@ -1,6 +1,58 @@
 var beginOrContinueInput = true;
 var resetInputAsFocusForTheFirstTimeState = true;
 
+// var request = (function(){
+//     var intv;
+//     var promise = Promise.resolve()
+//     return function(value,n){
+//        if(intv){
+//            clearTimeout(intv)
+//        }
+//        intv =  setTimeout(function(){
+//          intv = null;
+//             promise = promise.then(function(){
+//                 return new Promise(function(resolve,reject){
+//                     var songNameQuery = new AV.Query('Song');
+//                     songNameQuery.contains('name',value);
+//                     var singerNameQuery = new AV.Query('Song');
+//                     singerNameQuery.contains('singer',value)
+//                     var query = AV.Query.or(songNameQuery,singerNameQuery);
+//                     query.select(['name','singer','url']);
+//                     query.find().then(function(songs){
+//                         songs.map(function(song){
+//                             console.log(ele.attributes)
+//                         })
+//                             resolve();
+//                     })
+//                 })
+//             })
+//        },n*1000)
+//     }
+// })()
+var request = (function () {
+    var intv;
+    var promise = Promise.resolve()
+    return function (value, n) {
+        var songNameQuery = new AV.Query('Song');
+        songNameQuery.contains('name', value);
+        if (intv) {
+            clearTimeout(intv)
+        }
+        intv = setTimeout(function () {
+            intv = null;
+            promise = promise.then(function () {
+                return songNameQuery.find().then(function (songs) {
+                    songs.map(function (song) {
+                        console.log(song.attributes)
+                    })
+                }, function (err) {
+                    console.log(err)
+                })
+            })
+        }, n * 1000)
+    }
+})()
+
 function isNullCharacter() {
     var value = $('input#query').val();
     return value === "" ? true : false;
@@ -15,7 +67,8 @@ function inputing() {
     $("svg.clear").removeClass("hide").addClass('show')
     $("label.holder").removeClass('show').addClass('hide')
 }
-function showSearchResultPageN(n){
+
+function showSearchResultPageN(n) {
     $('.aboutSearch>ul>li').eq(n).removeClass('hide').addClass('show').siblings('.show').removeClass('show').addClass('hide')
 }
 
@@ -50,11 +103,11 @@ $('input#query').on('input', function (e) {
     }
     var $input = $(e.currentTarget)
     var value = $input.val()
-    if(value.trim()===''){
+    if (value.trim() === '') {
         return;
-    }else{
-    $('.inputValue').html(`搜索"${value}"`)
-
+    } else {
+        $('.inputValue').html(`搜索"${value}"`)
+        request(value, 0.4)
     }
     // let $input = $(this);
 })
@@ -69,38 +122,3 @@ $('svg.clear').on('click', function (e) {
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
-
-var request = (function(){
-    var intv;
-    var promise = Promise.resolve()
-    return function(value,n){
-       if(intv){
-           clearTimeout(intv)
-       }
-       intv =  setTimeout(function(){
-         intv = null;
-            promise = promise.then(function(){
-                return new Promise(function(resolve,reject){
-                    var songNameQuery = new AV.Query('Song');
-                    songNameQuery.contains('name',value);
-                    var singerNameQuery = new AV.Query('Song');
-                    singerNameQuery.contains('singer',value)
-                    var query = AV.Query.or(songNameQuery,singerNameQuery);
-                    query.select(['name','singer','url']);
-                    query.find().then(function(songs){
-                        songs.map(function(song){
-                            console.log(ele.attributes)
-
-
-
-
-                            resolve();
-                        })
-                    })
-
-                })
-            })
-       },n*1000)
-    }
-})()
-
