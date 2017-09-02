@@ -557,16 +557,20 @@
             flex-grow: 1;
             font-size: 15px;
             color: #333;
+            font-family: Helvetica, sans-serif;
         }
         .searchTip li{
-            display: flex;
             padding-left: 10px;
-            align-items: center;
-
         }
         .searchTip .icon{
-            width: 1em;
-            height: 1em;
+            width: 15px;
+            height: 15px;
             margin-right: 7px;
             fill: #b1b1b2;
+        }
+
+        .searchTip a{
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
         }

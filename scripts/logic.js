@@ -1,34 +1,56 @@
 var beginOrContinueInput = true;
 var resetInputAsFocusForTheFirstTimeState = true;
 
-var request = (function(){
+var request = (function () {
     var intv;
     var promise = Promise.resolve()
-    return function(value,n){
-       if(intv){
-           clearTimeout(intv)
-       }
-       intv =  setTimeout(function(){
-         intv = null;
-            promise = promise.then(function(){
-                return new Promise(function(resolve,reject){
-                    var query = new AV.Query('Song');
-                    query.contains('name',value);
-                    query.find().then(function(songs){
-                        songs.map(function(song){
-                            console.log(song.attributes)
-                        })
+    return function (value, delay) {
+        if (intv) {
+            clearTimeout(intv)
+        }
+        intv = setTimeout(function () {
+            intv = null;
+            promise = promise.then(function () {
+                return new Promise(function (resolve, reject) {
+                    var queryName = new AV.Query('Song');
+                    queryName.contains('name', value);
+                    var querySinger = new AV.Query('Song');
+                    querySinger.contains('singer', value);
+                    var query = AV.Query.or(queryName, querySinger)
+                    query.find().then(function (songs) {
+                        $('.searchTip').empty();
+                        if (songs.length === 0) {
+                            $('.searchTip').html('')
+                        } else {
+                            songs.map(function (song) {
+                                let songInfo = song.attributes;
+                                let li = `
+                            <li class="upperline" data-id="${song.id}">
+                                        <a href="./song.html?id=${song.id}">
+                                        <svg class="icon">
+                                            <use xlink:href="#icon-search"></use>
+                                        </svg>
+                                        <div class="searchResult">
+                                           ${songInfo.name} - ${songInfo.singer}
+                                        </div>
+                                        </a>
+                                    </li>
+                            `
+                                $('.searchTip').append(li)
+                            })
+                        }
                         resolve();
+
                     })
                 })
             })
-       },n*1000)
+        }, delay * 1000)
     }
 })()
 // var request = (function () {
 //     var intv;
 //     var promise = Promise.resolve()
-//     return function (value, n) {
+//     return function (value, delay) {
 //         var songNameQuery = new AV.Query('Song');
 //         songNameQuery.contains('name', value);
 //         if (intv) {
@@ -45,7 +67,7 @@ var request = (function(){
 //                     console.log(err)
 //                 })
 //             })
-//         }, n * 1000)
+//         }, delay * 1000)
 //     }
 // })()
 
@@ -118,3 +140,4 @@ $('svg.clear').on('click', function (e) {
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
+
