@@ -1,57 +1,53 @@
 var beginOrContinueInput = true;
 var resetInputAsFocusForTheFirstTimeState = true;
 
-// var request = (function(){
-//     var intv;
-//     var promise = Promise.resolve()
-//     return function(value,n){
-//        if(intv){
-//            clearTimeout(intv)
-//        }
-//        intv =  setTimeout(function(){
-//          intv = null;
-//             promise = promise.then(function(){
-//                 return new Promise(function(resolve,reject){
-//                     var songNameQuery = new AV.Query('Song');
-//                     songNameQuery.contains('name',value);
-//                     var singerNameQuery = new AV.Query('Song');
-//                     singerNameQuery.contains('singer',value)
-//                     var query = AV.Query.or(songNameQuery,singerNameQuery);
-//                     query.select(['name','singer','url']);
-//                     query.find().then(function(songs){
-//                         songs.map(function(song){
-//                             console.log(ele.attributes)
-//                         })
-//                             resolve();
-//                     })
-//                 })
-//             })
-//        },n*1000)
-//     }
-// })()
-var request = (function () {
+var request = (function(){
     var intv;
     var promise = Promise.resolve()
-    return function (value, n) {
-        var songNameQuery = new AV.Query('Song');
-        songNameQuery.contains('name', value);
-        if (intv) {
-            clearTimeout(intv)
-        }
-        intv = setTimeout(function () {
-            intv = null;
-            promise = promise.then(function () {
-                return songNameQuery.find().then(function (songs) {
-                    songs.map(function (song) {
-                        console.log(song.attributes)
+    return function(value,n){
+       if(intv){
+           clearTimeout(intv)
+       }
+       intv =  setTimeout(function(){
+         intv = null;
+            promise = promise.then(function(){
+                return new Promise(function(resolve,reject){
+                    var query = new AV.Query('Song');
+                    query.contains('name',value);
+                    query.find().then(function(songs){
+                        songs.map(function(song){
+                            console.log(song.attributes)
+                        })
+                        resolve();
                     })
-                }, function (err) {
-                    console.log(err)
                 })
             })
-        }, n * 1000)
+       },n*1000)
     }
 })()
+// var request = (function () {
+//     var intv;
+//     var promise = Promise.resolve()
+//     return function (value, n) {
+//         var songNameQuery = new AV.Query('Song');
+//         songNameQuery.contains('name', value);
+//         if (intv) {
+//             clearTimeout(intv)
+//         }
+//         intv = setTimeout(function () {
+//             intv = null;
+//             promise = promise.then(function () {
+//                 return songNameQuery.find().then(function (songs) {
+//                     songs.map(function (song) {
+//                         console.log(song.attributes)
+//                     })
+//                 }, function (err) {
+//                     console.log(err)
+//                 })
+//             })
+//         }, n * 1000)
+//     }
+// })()
 
 function isNullCharacter() {
     var value = $('input#query').val();
