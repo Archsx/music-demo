@@ -25,7 +25,7 @@ var request = (function () {
                             songs.map(function (song) {
                                 let songInfo = song.attributes;
                                 let li = `
-                            <li class="upperline" data-id="${song.id}">
+                            <li  data-id="${song.id}" class="uppercase">
                                         <a href="./song.html?id=${song.id}">
                                         <svg class="icon">
                                             <use xlink:href="#icon-search"></use>
@@ -140,4 +140,5 @@ $('svg.clear').on('click', function (e) {
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
+
 

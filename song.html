@@ -1,43 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PLAY</title>
-    <link rel="stylesheet" type="" href="./song.css">
-</head>
+    <title>Document</title>
+    <link rel="stylesheet" type="" href="./reset.css">
+    <style>
+        .page{
+            height: 100vh;
+            position: relative;
+            padding-top: 0.1px;
+        }
+        .page::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url('//i.loli.net/2017/09/03/59aadbcbd6aae.jpg') no-repeat center;
+            background-size: auto 100%;
+            transform: scale(1.5);
+            transform-origin: center top;
+            filter: blur(15px);
+             z-index: -3; 
+        }
 
+
+        .page::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+             z-index: -2; 
+             background-color: rgba(0,0,0, .55);
+        }
+        .disk .circle{
+            width: 248px;
+            height: 248px;
+            margin: 0 auto;
+            margin-top: 63px;
+            position: relative;
+        }
+        .disk .circle::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right:0;
+            background: url(https://i.loli.net/2017/09/03/59aae87080cfa.png) no-repeat center;
+            background-size: contain; 
+        }
+        .disk .circle::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right:0;
+            background: url(https://i.loli.net/2017/09/03/59aae87050882.png) no-repeat center;
+            background-size: contain;
+        }
+        .disk .circle img{
+            z-index: -1;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+             transform: translate(-50%,-50%); 
+
+            /* border-radius: 50%; */
+        }
+    </style>
+</head>
 <body>
     <div class="page">
-        <div class="disc-container">
-            <img class="pointer" src="http://s3.music.126.net/m/s/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862" alt="">
-            <div class="disc">
-                <img src="http://s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="" class="ring">
-                <img src="http://s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="" class="light">
-                <img src="http://p1.music.126.net/QbHndX394pqFX0eopuQ5gA==/18505880209094414.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0"
-                    alt="">
+        <div class="pointer"></div>
+        <div class="disk">
+            <div class="circle">
+                <img src="//i.loli.net/2017/09/03/59aadbcbd6aae.jpg" alt="">
             </div>
         </div>
-        <div class="song-description">
-            <h1>标题</h1>
-            <p>歌词1</p>
-            <p>歌词2</p>
-            <p>歌词3</p>
-            <p>歌词4</p>
-            <p>歌词5</p>
-            <p>歌词6</p>
-            <p>歌词7</p>
-            <p>歌词8</p>
-            <p>歌词9</p>
-            <p>歌词10</p>
-        </div>
-        <div class="links">
-            <a href="#">打开</a>
-            <a href="#">下载</a>
-        </div>
-    </div>
+        <div class="lyric"></div>
+        <div class="actions"></div>
+    </div>   
 </body>
-
 </html>
