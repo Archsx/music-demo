@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,14 @@
     <title>Document</title>
     <link rel="stylesheet" type="" href="./reset.css">
     <style>
-        .page{
+        .page {
             height: 100vh;
             position: relative;
             padding-top: 0.1px;
+            overflow: hidden;
         }
-        .page::before{
+
+        .page::before {
             content: '';
             position: absolute;
             top: 0;
@@ -24,70 +27,211 @@
             transform: scale(1.5);
             transform-origin: center top;
             filter: blur(15px);
-             z-index: -3; 
+            z-index: -3;
         }
 
 
-        .page::after{
+        .page::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
             width: 100%;
-             z-index: -2; 
-             background-color: rgba(0,0,0, .55);
+            z-index: -2;
+            background-color: rgba(0, 0, 0, .55);
         }
-        .disk .circle{
-            width: 248px;
-            height: 248px;
+
+        .disk .circle {
+            width: 342px;
+            height: 342px;
             margin: 0 auto;
-            margin-top: 63px;
+             margin-top: 80px; 
             position: relative;
         }
-        .disk .circle::before{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right:0;
-            background: url(https://i.loli.net/2017/09/03/59aae87080cfa.png) no-repeat center;
-            background-size: contain; 
+
+        svg.play {
+            position:absolute;
+            left:50%;
+            top: 50%;
+            width: 65px;
+            height: 65px;
+            transform: translate(-50%,-50%);
+            z-index: 10;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .3)
         }
-        .disk .circle::after{
+
+        .disk .circle::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
-            right:0;
+            right: 0;
+            background: url(https://i.loli.net/2017/09/03/59aae87080cfa.png) no-repeat center;
+            background-size: contain;
+        }
+
+        .disk .circle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: url(https://i.loli.net/2017/09/03/59aae87050882.png) no-repeat center;
             background-size: contain;
         }
-        .disk .circle img{
+
+        .disk .circle img.cover {
             z-index: -1;
-            width: 150px;
-            height: 150px;
+            width: 212px;
+            height: 212px;
             position: absolute;
             left: 50%;
             top: 50%;
-             transform: translate(-50%,-50%); 
-
-            /* border-radius: 50%; */
+            margin-left: -106px;
+            margin-top: -106px;
+            transform: translate(-50%,-50%);  
+            border-radius: 50%;
         }
+
+        .disk .circle.playing>img.cover,
+        .disk .circle.circle.playing::after {
+            animation: spin 20s linear infinite;
+        }
+
+        .disk .circle.playing.pause>img.cover,
+        .disk .circle.playing.pause::after {
+            animation-play-state: paused;
+        }
+
+
+
+        @keyframes spin {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(90deg);
+            }
+            50% {
+                transform: rotateZ(180deg);
+            }
+            75% {
+                transform: rotateZ(270deg);
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+        /* .pointer{
+            position: relative;
+        } */
+        .circle img.pointer{
+            width: 110px;
+            height: 157px;
+            position: absolute;
+            left:150px;
+            top:-80px;;
+            /* z-index: 11; */
+        }
+        .lyric{
+            margin-top: 25px;
+            padding: 0 35px;
+            /* background: red; */
+            text-align: center;
+        }
+        .lyric h2{
+            color: #fefefe;
+            font-size: 18px;
+            line-height: 19.8px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: 400;
+        }
+        .lyric h2 b{
+            font-weight: 400;
+            font-size:16px;
+            color: hsla(0,0%,100%,.6);
+            line-height: 17.6px;
+        }
+        /* .lyric h2 span.mid{
+            margin: 0 4px;
+        } */
     </style>
 </head>
+
 <body>
     <div class="page">
-        <div class="pointer"></div>
+        <!-- <div class="pointer"> -->
+        <!-- </div> -->
         <div class="disk">
-            <div class="circle">
-                <img src="//i.loli.net/2017/09/03/59aadbcbd6aae.jpg" alt="">
+            <div class="circle playing">
+                    <svg class="icon play">
+                        <use xlink:href="#icon-iconplay"></use>
+                    </svg>                    
+                <img src="//i.loli.net/2017/09/03/59aadbcbd6aae.jpg" alt="" class="cover">
+            <img src="//i.loli.net/2017/09/04/59ad5a2f3c72e.png" alt="" class="pointer">
             </div>
         </div>
-        <div class="lyric"></div>
+        <div class="lyric">
+            <h2>
+                <span>暧昧</span>
+                <span class="mid">-</span>
+                <b>薛之谦</b>
+            </h2>
+        </div>
         <div class="actions"></div>
-    </div>   
+    </div>
+    <script src="//at.alicdn.com/t/font_405600_vynsqbquqwbl0udi.js"></script>
+    <script src="./vendors/jquery.min.js"></script>
+    <script src="./vendors/av-min.js"></script>
+    <script src="./scripts/initialize.js"></script>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        var id = getParameterByName('id')
+        var query = new AV.Query('Song')
+        query.get(id).then(function (song) {
+            // let {url,lyric} = song.attributes;
+            var url = song.attributes.url;
+            var lyric = song.attributes.lyric
+            var video = document.createElement('video')
+            video.src = url;
+            document.head.appendChild(video)
+            video.play();
+        })
+
+        function parseLyric(lyric) {
+            // var lrc = lyric.split('\n');
+            var lrc = lyric.match(/^[^ ][\S ]*/mg);
+            var length = lrc.length;
+            var lrcObj = {};
+            var timeReg = /\[\d*:\d*.\d*\]/g
+            for (var i = 0; i < length; i++) {
+                let timeArr = lrc[i].match(timeReg)
+                if (!timeArr) {
+                    continue
+                }
+                let timeArr = timeArr[0].match(/\d*:\d*.\d*/)
+                let clause = lrc[i].replace(timeReg, '')
+                let min = parseInt(timeArr[0].split(':')[0])
+                let sec = parseInt(timeArr[0].split(':')[1].split(".")[0])
+                let time = min * 60 + sec;
+                lrcObj[time] = clause;
+            }
+            return lrcObj;
+        }
+    </script>
 </body>
+
 </html>

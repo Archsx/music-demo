@@ -37,6 +37,7 @@ var request = (function () {
                                     </li>
                             `
                                 $('.searchTip').append(li)
+        
                             })
                         }
                         resolve();
@@ -140,5 +141,4 @@ $('svg.clear').on('click', function (e) {
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
-
 
