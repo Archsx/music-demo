@@ -8,6 +8,18 @@
     <title>Document</title>
     <link rel="stylesheet" type="" href="./reset.css">
     <style>
+        .show{
+            display: block;
+        }
+        .hide{
+            display: none;
+        }
+        .highLight{
+            color:#ffffff
+        }
+        .pause{
+            animation-play-state: paused;
+        }
         .page {
             height: 100vh;
             position: relative;
@@ -46,18 +58,18 @@
             width: 342px;
             height: 342px;
             margin: 0 auto;
-             margin-top: 80px; 
+            margin-top: 80px;
             position: relative;
         }
 
         svg.play {
-            position:absolute;
-            left:50%;
+            position: absolute;
+            left: 50%;
             top: 50%;
             width: 65px;
             height: 65px;
-            transform: translate(-50%,-50%);
-            z-index: 10;
+            transform: translate(-50%, -50%);
+            z-index: 15;
             border-radius: 50%;
             background: rgba(0, 0, 0, .3)
         }
@@ -85,7 +97,7 @@
         }
 
         .disk .circle img.cover {
-            z-index: -1;
+            z-index: 12;
             width: 212px;
             height: 212px;
             position: absolute;
@@ -93,7 +105,7 @@
             top: 50%;
             margin-left: -106px;
             margin-top: -106px;
-            transform: translate(-50%,-50%);  
+            /* transform: translate(-50%, -50%); */
             border-radius: 50%;
         }
 
@@ -129,21 +141,25 @@
         /* .pointer{
             position: relative;
         } */
-        .circle img.pointer{
+
+        .circle img.pointer {
             width: 110px;
             height: 157px;
             position: absolute;
-            left:150px;
-            top:-80px;;
+            left: 150px;
+            top: -80px;
+            ;
             /* z-index: 11; */
         }
-        .lyric{
+
+        .lyric {
             margin-top: 25px;
             padding: 0 35px;
             /* background: red; */
             text-align: center;
         }
-        .lyric h2{
+
+        .lyric h2 {
             color: #fefefe;
             font-size: 18px;
             line-height: 19.8px;
@@ -151,27 +167,32 @@
             text-overflow: ellipsis;
             font-weight: 400;
         }
-        .lyric h2 b{
+
+        .lyric h2 b {
             font-weight: 400;
-            font-size:16px;
-            color: hsla(0,0%,100%,.6);
+            font-size: 16px;
+            color: hsla(0, 0%, 100%, .6);
             line-height: 17.6px;
         }
         /* .lyric h2 span.mid{
             margin: 0 4px;
         } */
-        .lyric .songLyric{
+
+        .lyric .songLyric {
             margin-top: 14px;
-        }
-        .lyric .lyricScroll{
             height: 88px;
+            overflow: hidden;
+        }
+
+        .lyric .lyricScroll {
+            /* height: 88px; */
             /* background: red; */
             font-size: 16px;
-            overflow: hidden;
-            color: hsla(0,0%,100%,.6);
+            color: hsla(0, 0%, 100%, .6);
             line-height: 1.5;
         }
-        .lyricScroll p{
+
+        .lyricScroll p {
             padding-bottom: 8px;
         }
     </style>
@@ -182,12 +203,12 @@
         <!-- <div class="pointer"> -->
         <!-- </div> -->
         <div class="disk">
-            <div class="circle playing">
-                    <svg class="icon play">
-                        <use xlink:href="#icon-iconplay"></use>
-                    </svg>                    
+            <div class="circle">
+                <svg class="icon play">
+                    <use xlink:href="#icon-iconplay"></use>
+                </svg>
                 <img src="//i.loli.net/2017/09/03/59aadbcbd6aae.jpg" alt="" class="cover">
-            <img src="//i.loli.net/2017/09/04/59ad5a2f3c72e.png" alt="" class="pointer">
+                <img src="//i.loli.net/2017/09/04/59ad5a2f3c72e.png" alt="" class="pointer">
             </div>
         </div>
         <div class="lyric">
@@ -198,9 +219,6 @@
             </h2>
             <div class="songLyric">
                 <div class="lyricScroll">
-                    <p>作曲：薛之谦</p>
-                    <p>作词：薛之谦</p>
-                    <p>反正现在的感情 都暧昧</p>
                 </div>
             </div>
         </div>
@@ -210,49 +228,7 @@
     <script src="./vendors/jquery.min.js"></script>
     <script src="./vendors/av-min.js"></script>
     <script src="./scripts/initialize.js"></script>
-    <script>
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-        var id = getParameterByName('id')
-        var query = new AV.Query('Song')
-        query.get(id).then(function (song) {
-            // let {url,lyric} = song.attributes;
-            var url = song.attributes.url;
-            var lyric = song.attributes.lyric
-            var video = document.createElement('video')
-            video.src = url;
-            document.head.appendChild(video)
-            video.play();
-        })
-
-        function parseLyric(lyric) {
-            // var lrc = lyric.split('\n');
-            var lrc = lyric.match(/^[^ ][\S ]*/mg);
-            var length = lrc.length;
-            var lrcObj = {};
-            var timeReg = /\[\d*:\d*.\d*\]/g
-            for (var i = 0; i < length; i++) {
-                let timeArr = lrc[i].match(timeReg)
-                if (!timeArr) {
-                    continue
-                }
-                let timeArr = timeArr[0].match(/\d*:\d*.\d*/)
-                let clause = lrc[i].replace(timeReg, '')
-                let min = parseInt(timeArr[0].split(':')[0])
-                let sec = parseInt(timeArr[0].split(':')[1].split(".")[0])
-                let time = min * 60 + sec;
-                lrcObj[time] = clause;
-            }
-            return lrcObj;
-        }
-    </script>
+    <script src="./scripts/song.js"></script>
 </body>
 
 </html>
