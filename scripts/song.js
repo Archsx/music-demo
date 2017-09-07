@@ -55,7 +55,7 @@ function parseLyric(lyric) {
             </h2>
         `
         $('.lyric').prepend(li)
-        $(`<style>.page::before { background:url(${coverImgURL}) no-repeat center;background-size:"auto 100%" }</style>`).appendTo("head")
+        $(`<style>.page::before { background:url(${coverImgURL}) no-repeat center;background-size:auto 100% }</style>`).appendTo("head")
         var img = document.createElement('img')
         img.src = coverImgURL;
         document.querySelector('.circle').appendChild(img)
