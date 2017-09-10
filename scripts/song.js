@@ -61,7 +61,8 @@ function parseLyric(lyric) {
         document.querySelector('.circle').appendChild(img)
         $(img).attr('class', 'cover')
         lrcObj = parseLyric(lyric)
-        var height = $('.lyricScroll p').height() + 8;
+        var paddingBottom = parseInt($('.lyricScroll p').css('padding-bottom'))
+        var height = $('.lyricScroll p').height() + paddingBottom;
         var video = document.createElement('video')
         video.src = url;
         document.head.appendChild(video)
@@ -77,6 +78,7 @@ function parseLyric(lyric) {
             if (lrcObj[crtTime]) {
                 let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
                 index = index < 0 ? 0 : index;
+                // console.log(height)
                 $('.lyricScroll').css({
                     transform: 'translateY(' + (-height * index) + 'px)'
                 })
