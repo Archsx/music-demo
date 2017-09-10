@@ -59,19 +59,76 @@
         }
 
         .disk .circle {
-            width: 342px;
-            height: 342px;
+            /* width: 342px;
+            height: 342px; */
             margin: 0 auto;
-            margin-top: 80px;
+            /* margin-top: 80px; */
             position: relative;
         }
-
+        @media screen and (min-width:360px){
+            svg.play {
+                width: 56px;
+                height: 56px;
+            }
+           .disk .circle{
+               margin-top: 70px;
+               width: 296px;
+               height: 296px;
+           } 
+           .disk .circle::before{
+            background: url(//i.loli.net/2017/09/10/59b4f67d581c3.png) no-repeat center;
+           }
+           .disk .circle::after{
+            background: url(//i.loli.net/2017/09/10/59b4f799b798b.png) no-repeat center;
+           }
+           .disk .circle img.cover{
+               width: 184px;
+               height: 184px;
+               margin-left: -92px;
+               margin-top: -92px;
+           }
+           .circle img.pointer{
+               width:96px;
+               height: 137px;
+               top: -70px;
+               left: 133px;
+           } 
+        }
+        @media screen and (min-width:414px){
+            svg.play {
+                width: 65px;
+                height: 65px;
+            }
+           .disk .circle{
+               margin-top: 80px;
+               width: 342px;
+               height: 342px;
+           } 
+           .disk .circle::before{
+            background: url(//i.loli.net/2017/09/10/59b4f6243fa1b.png) no-repeat center;
+           }
+           .disk .circle::after{
+            background: url(//i.loli.net/2017/09/10/59b4f82818e1d.png) no-repeat center;
+           }
+           .disk .circle img.cover{
+               width: 212px;
+               height: 212px;
+               margin-left: -106px;
+               margin-top: -106px;
+           }
+           .circle img.pointer{
+               width:110px;
+               height: 157px;
+               top: -80px;
+               left: 150px;
+           } 
+        }
         svg.play {
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 65px;
-            height: 65px;
+            /* width: 65px;
+            height: 65px; */
             transform: translate(-50%, -50%);
             z-index: 15;
             border-radius: 50%;
@@ -85,7 +142,7 @@
             left: 0;
             bottom: 0;
             right: 0;
-            background: url(https://i.loli.net/2017/09/03/59aae87080cfa.png) no-repeat center;
+            /* background: url(https://i.loli.net/2017/09/03/59aae87080cfa.png) no-repeat center; */
             background-size: contain;
         }
 
@@ -96,19 +153,19 @@
             left: 0;
             bottom: 0;
             right: 0;
-            background: url(https://i.loli.net/2017/09/03/59aae87050882.png) no-repeat center;
+            /* background: url(https://i.loli.net/2017/09/03/59aae87050882.png) no-repeat center; */
             background-size: contain;
         }
 
         .disk .circle img.cover {
             z-index: 12;
-            width: 212px;
-            height: 212px;
+            /* width: 212px;
+            height: 212px; */
             position: absolute;
             left: 50%;
             top: 50%;
-            margin-left: -106px;
-            margin-top: -106px;
+            /* margin-left: -106px;
+            margin-top: -106px; */
             /* transform: translate(-50%, -50%); */
             border-radius: 50%;
         }
@@ -147,11 +204,11 @@
         } */
 
         .circle img.pointer {
-            width: 110px;
-            height: 157px;
+            /* width: 110px;
+            height: 157px; */
             position: absolute;
-            left: 150px;
-            top: -80px;
+            /* left: 150px;
+            top: -80px; */
             ;
             /* z-index: 11; */
         }
@@ -161,43 +218,83 @@
             padding: 0 35px;
             text-align: center;
         }
+        @media screen and (min-width:360px){
+             .lyric h2 span {
+                font-size: 15px;
+                line-height: 1.1;
+            }
+            .lyric h2 b {
+                font-size: 13px;
+                line-height: 1.1;
+            }
+            .lyric .songLyric {
+                height: 67px;
+            }
+            .lyric .lyricScroll {
+                font-size: 13px;
+            }
+            .lyricScroll p {
+                padding-bottom: 5px;
+            }
+        }
+        @media screen and (min-width:414px){
+             .lyric h2 span {
+                font-size: 18px;
+                line-height: 1.1;
+            }
+            .lyric h2 b {
+                font-size: 16px;
+                line-height: 1.1;
+            }
+            .lyric .songLyric {
+                height: 88px;
+            }
+            .lyric .lyricScroll {
+                font-size: 16px;
+            }
+            .lyricScroll p {
+                padding-bottom: 8px;
+            }
+        }
 
         .lyric h2 {
             color: #fefefe;
             font-size: 0px;
-            line-height: 19.8px;
             white-space: nowrap;
             text-overflow: ellipsis;
             font-weight: 400;
         }
-        .lyric h2 span{
-            font-size: 18px;
+
+        .lyric h2 span {
+            /* font-size: 18px;
+            line-height: 19.8px; */
         }
 
         .lyric h2 b {
             font-weight: 400;
-            font-size: 16px;
+            /* font-size: 16px; */
             color: hsla(0, 0%, 100%, .6);
-            line-height: 17.6px;
+            line-height: 1.1;
         }
-         .lyric h2 span.mid{
+
+        .lyric h2 span.mid {
             margin: 0 4px;
-        } 
+        }
 
         .lyric .songLyric {
             margin-top: 14px;
-            height: 88px;
+            /* height: 88px; */
             overflow: hidden;
         }
 
         .lyric .lyricScroll {
-            font-size: 16px;
+            /* font-size: 16px; */
             color: hsla(0, 0%, 100%, .6);
             line-height: 1.5;
         }
 
         .lyricScroll p {
-            padding-bottom: 8px;
+            /* padding-bottom: 8px; */
         }
 
         .footer-wrap {
@@ -208,18 +305,43 @@
             z-index: 10;
         }
 
+
+        @media screen and (min-width:360px) {
+            .footer {
+                max-width: 362px;
+            }
+            .footer .btn {
+                height: 42px;
+                line-height: 42px;
+                font-size: 18px;
+            }
+           
+        }
+
+        @media screen and (min-width:414px) {
+            .footer {
+                max-width: 390px;
+            }
+            .footer .btn {
+                height: 47px;
+                line-height: 47px;
+                font-size: 20px;
+            }
+        }
+
         .footer {
-            max-width: 390px;
+            /* max-width: 390px; */
             margin: 0 auto;
             padding: 0 35px;
             display: flex;
             /* justify-content: space-between; */
         }
-        .btn{
+
+        .btn {
             display: block;
-            font-size: 20px;
+            /* font-size: 20px;
             height: 47px;
-            line-height: 47px;
+            line-height: 47px; */
             text-align: center;
             padding: 0 6px;
             flex-grow: 1;
@@ -228,12 +350,14 @@
             letter-spacing: 6px;
             text-indent: 6px;
         }
-        .hollow{
+
+        .hollow {
             margin-left: 0;
             color: #d43b32;
             background: transparent;
         }
-        .red{
+
+        .red {
             margin-left: 12px;
             background: #d43b32;
             color: #fff;
