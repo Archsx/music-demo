@@ -78,7 +78,6 @@ function parseLyric(lyric) {
             if (lrcObj[crtTime]) {
                 let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
                 index = index < 0 ? 0 : index;
-                // console.log(height)
                 $('.lyricScroll').css({
                     transform: 'translateY(' + (-height * index) + 'px)'
                 })
