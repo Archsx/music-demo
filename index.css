@@ -628,15 +628,20 @@
         .hotSongList>ol>li a{
             display: flex;
             padding-left: 10px;
+            position: relative;
         }
+
         .rank{
             display: flex;
-            color: #df3436;
             align-items: center;
             font-size: 17px;
             width: 28px;
+            color:#999;
         }
+        .rank.hotSong{
+            color: #df3436;
 
+        }
 
         .getMoreSongs{
             height: 55px;
