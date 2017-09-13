@@ -219,10 +219,12 @@
         }
 
         .newSongs>ol>li {
-            display: flex;
             position: relative;
-        }
 
+        }
+        .newSongs>ol>li a{
+             display: flex; 
+        }
         .newSongs>ol>li::after {
             content: '';
             position: absolute;

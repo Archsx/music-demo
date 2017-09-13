@@ -77,11 +77,19 @@ function parseLyric(lyric) {
             var crtTime = parseInt($('video')[0].currentTime);
             if (lrcObj[crtTime]) {
                 let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
-                index = index < 0 ? 0 : index;
-                $('.lyricScroll').css({
-                    transform: 'translateY(' + (-height * index) + 'px)'
-                })
-                $('.lyricScroll p').eq(index + 1).addClass('highLight').siblings('.highLight').removeClass('highLight')
+                // index = index < 0 ? 0 : index;
+                if (index < 0) {
+                    index = 0;
+                    $('.lyricScroll').css({
+                        transform: 'translateY(' + (-height * index) + 'px)'
+                    })
+                    $('.lyricScroll p').eq(index).addClass('highLight').siblings('.highLight').removeClass('highLight')
+                } else {
+                    $('.lyricScroll').css({
+                        transform: 'translateY(' + (-height * index) + 'px)'
+                    })
+                    $('.lyricScroll p').eq(index + 1).addClass('highLight').siblings('.highLight').removeClass('highLight')
+                }
             }
         })
     })
