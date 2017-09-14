@@ -1,5 +1,7 @@
 var beginOrContinueInput = true;
 var resetInputAsFocusForTheFirstTimeState = true;
+var result;
+var historyObject = {}
 
 var request = (function () {
     var intv;
@@ -19,6 +21,7 @@ var request = (function () {
                     var query = AV.Query.or(queryName, querySinger)
                     query.find().then(function (songs) {
                         $('.searchTip').empty();
+                        result = songs;
                         if (songs.length === 0) {
                             $('.searchTip').html('')
                         } else {
@@ -31,17 +34,16 @@ var request = (function () {
                                             <use xlink:href="#icon-search"></use>
                                         </svg>
                                         <div class="searchResult">
-                                           ${songInfo.name} - ${songInfo.singer}
+                                            ${songInfo.name} ${songInfo.singer}
                                         </div>
                                         </a>
                                     </li>
                             `
                                 $('.searchTip').append(li)
-        
+
                             })
                         }
                         resolve();
-
                     })
                 })
             })
@@ -141,4 +143,38 @@ $('svg.clear').on('click', function (e) {
     resetInputAsFocusForTheFirstTimeState = true;
     $('input#query').focus();
 })
-
+$('.searchTip').on('click', 'li', function (e) {
+    let index = $(e.currentTarget).index();
+    e.preventDefault();
+    showSearchResultPageN(2)
+    // console.log(result[index])
+    $('.searchResultDetail ol').empty();
+    let li = `
+                    <li>
+                        <a href="./song.html?id=${result[index].id}">
+                                <div class="songInfo">
+                                    <div class="songName">
+                                        <p>${result[index].attributes.name}</p>
+                                    </div>
+                                    <div class="singer">
+                                        ${result[index].attributes.singer}-${result[index].attributes.album}
+                                    </div>
+                                </div>
+                                <div class="play">
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-play"></use>
+                                    </svg>
+                                </div>
+                        </a>
+                    </li>
+    `
+    $('.searchResultDetail ol').append(li);
+    let liSQ = `
+                        <svg class="icon">
+                            <use xlink:href="#icon-SQ"></use>
+                        </svg>
+         `;
+    if (result[index].attributes.highquality) {
+        $('.searchResultDetail li').find('.singer').prepend(liSQ)
+    }
+})
