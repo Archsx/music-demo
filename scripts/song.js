@@ -60,7 +60,6 @@ function parseLyric(lyric) {
         img.src = coverImgURL;
         document.querySelector('.circle').appendChild(img)
         $(img).attr('class', 'cover')
-        lrcObj = parseLyric(lyric)
         var paddingBottom = parseInt($('.lyricScroll p').css('padding-bottom'))
         var height = $('.lyricScroll p').height() + paddingBottom;
         var video = document.createElement('video')
@@ -73,29 +72,38 @@ function parseLyric(lyric) {
                 transform: 'translateY(0)'
             })
         })
-        $('video')[0].addEventListener('timeupdate', function (e) {
-            var crtTime = parseInt($('video')[0].currentTime);
-            if (lrcObj[crtTime]) {
-                let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
-                // index = index < 0 ? 0 : index;
-                if (index < 0) {
-                    index = 0;
-                    $('.lyricScroll').css({
-                        transform: 'translateY(' + (-height * index) + 'px)'
-                    })
-                    $('.lyricScroll p').eq(index).addClass('highLight').siblings('.highLight').removeClass('highLight')
-                } else {
-                    $('.lyricScroll').css({
-                        transform: 'translateY(' + (-height * index) + 'px)'
-                    })
-                    $('.lyricScroll p').eq(index + 1).addClass('highLight').siblings('.highLight').removeClass('highLight')
+        if (lyric) {
+            lrcObj = parseLyric(lyric)
+            $('video')[0].addEventListener('timeupdate', function (e) {
+                var crtTime = parseInt($('video')[0].currentTime);
+                if (lrcObj[crtTime]) {
+                    let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
+                    // index = index < 0 ? 0 : index;
+                    if (index < 0) {
+                        index = 0;
+                        $('.lyricScroll').css({
+                            transform: 'translateY(' + (-height * index) + 'px)'
+                        })
+                        $('.lyricScroll p').eq(index).addClass('highLight').siblings('.highLight').removeClass('highLight')
+                    } else {
+                        $('.lyricScroll').css({
+                            transform: 'translateY(' + (-height * index) + 'px)'
+                        })
+                        $('.lyricScroll p').eq(index + 1).addClass('highLight').siblings('.highLight').removeClass('highLight')
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            let li = `
+                    <p class='pure'>纯音乐，无歌词</p>
+                `
+            $('.lyricScroll').append(li)
+        }
     })
 })()
 $('svg.play').on('click', function (e) {
     $('video')[0].play()
+    // $('video').play()
     $('.circle').removeClass('pause').addClass('playing')
     $('svg.play').addClass('hide')
 })

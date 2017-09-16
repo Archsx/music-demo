@@ -65,64 +65,67 @@
             /* margin-top: 80px; */
             position: relative;
         }
-        @media screen and (min-width:360px){
+
+        @media screen and (min-width:360px) {
             svg.play {
                 width: 56px;
                 height: 56px;
             }
-           .disk .circle{
-               margin-top: 70px;
-               width: 296px;
-               height: 296px;
-           } 
-           .disk .circle::before{
-            background: url(//i.loli.net/2017/09/10/59b4f67d581c3.png) no-repeat center;
-           }
-           .disk .circle::after{
-            background: url(//i.loli.net/2017/09/10/59b4f799b798b.png) no-repeat center;
-           }
-           .disk .circle img.cover{
-               width: 184px;
-               height: 184px;
-               margin-left: -92px;
-               margin-top: -92px;
-           }
-           .circle img.pointer{
-               width:96px;
-               height: 137px;
-               top: -70px;
-               left: 133px;
-           } 
+            .disk .circle {
+                margin-top: 70px;
+                width: 296px;
+                height: 296px;
+            }
+            .disk .circle::before {
+                background: url(//i.loli.net/2017/09/10/59b4f67d581c3.png) no-repeat center;
+            }
+            .disk .circle::after {
+                background: url(//i.loli.net/2017/09/10/59b4f799b798b.png) no-repeat center;
+            }
+            .disk .circle img.cover {
+                width: 184px;
+                height: 184px;
+                margin-left: -92px;
+                margin-top: -92px;
+            }
+            .circle img.pointer {
+                width: 96px;
+                height: 137px;
+                top: -70px;
+                left: 133px;
+            }
         }
-        @media screen and (min-width:414px){
+
+        @media screen and (min-width:414px) {
             svg.play {
                 width: 65px;
                 height: 65px;
             }
-           .disk .circle{
-               margin-top: 80px;
-               width: 342px;
-               height: 342px;
-           } 
-           .disk .circle::before{
-            background: url(//i.loli.net/2017/09/10/59b4f6243fa1b.png) no-repeat center;
-           }
-           .disk .circle::after{
-            background: url(//i.loli.net/2017/09/10/59b4f82818e1d.png) no-repeat center;
-           }
-           .disk .circle img.cover{
-               width: 212px;
-               height: 212px;
-               margin-left: -106px;
-               margin-top: -106px;
-           }
-           .circle img.pointer{
-               width:110px;
-               height: 157px;
-               top: -80px;
-               left: 150px;
-           } 
+            .disk .circle {
+                margin-top: 80px;
+                width: 342px;
+                height: 342px;
+            }
+            .disk .circle::before {
+                background: url(//i.loli.net/2017/09/10/59b4f6243fa1b.png) no-repeat center;
+            }
+            .disk .circle::after {
+                background: url(//i.loli.net/2017/09/10/59b4f82818e1d.png) no-repeat center;
+            }
+            .disk .circle img.cover {
+                width: 212px;
+                height: 212px;
+                margin-left: -106px;
+                margin-top: -106px;
+            }
+            .circle img.pointer {
+                width: 110px;
+                height: 157px;
+                top: -80px;
+                left: 150px;
+            }
         }
+
         svg.play {
             position: absolute;
             left: 50%;
@@ -218,8 +221,9 @@
             padding: 0 35px;
             text-align: center;
         }
-        @media screen and (min-width:360px){
-             .lyric h2 span {
+
+        @media screen and (min-width:360px) {
+            .lyric h2 span {
                 font-size: 15px;
                 line-height: 1.1;
             }
@@ -237,8 +241,9 @@
                 padding-bottom: 5px;
             }
         }
-        @media screen and (min-width:414px){
-             .lyric h2 span {
+
+        @media screen and (min-width:414px) {
+            .lyric h2 span {
                 font-size: 18px;
                 line-height: 1.1;
             }
@@ -254,6 +259,13 @@
             }
             .lyricScroll p {
                 padding-bottom: 8px;
+            }
+            .lyricScroll p.pure {
+                color: hsla(0, 0%, 100%, .6);
+                text-align: center;
+                line-height: 1;
+                padding-bottom: 0;
+                padding-top: 18px;
             }
         }
 
@@ -293,8 +305,11 @@
             line-height: 1.5;
         }
 
-        .lyricScroll p {
-            /* padding-bottom: 8px; */
+        .lyricScroll p.pure {
+            color: hsla(0, 0%, 100%, .6);
+            text-align: center;
+            line-height: 1;
+            padding-top: 18px;
         }
 
         .footer-wrap {
@@ -315,7 +330,6 @@
                 line-height: 42px;
                 font-size: 18px;
             }
-           
         }
 
         @media screen and (min-width:414px) {

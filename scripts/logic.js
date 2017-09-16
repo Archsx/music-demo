@@ -125,6 +125,8 @@ $('input#query').on('input', function (e) {
     var $input = $(e.currentTarget)
     var value = $input.val()
     if (value.trim() === '') {
+        $('.inputValue').html('')
+        $('.searchTip').empty();
         return;
     } else {
         $('.inputValue').html(`搜索"${value}"`)
@@ -177,4 +179,84 @@ $('.searchTip').on('click', 'li', function (e) {
     if (result[index].attributes.highquality) {
         $('.searchResultDetail li').find('.singer').prepend(liSQ)
     }
+    $('input#query').val($(e.currentTarget).find('.searchResult').text().trim())
+    historyObject[$('input#query').val()] = {
+        haveSearched:true,
+        info:result[index]
+    };
+initializeHistoryObject()
 })
+function initializeHistoryObject(){
+    $('.hotAndHistory .history').children().remove()
+    let keyArray = Object.keys(historyObject).reverse();
+    if(keyArray.length>5){
+        keyArray = keyArray.slice(0,6)
+    }
+    keyArray.map(function(ele){
+        if(historyObject[ele].haveSearched) {
+            let li = `
+            <li data='${ele}'>
+                <div class="clock">
+                    <svg class="icon icon-clock">
+                        <use xlink:href="#icon-clock"></use>
+                    </svg>
+                </div>
+                <div class="searchHistoryContent">
+                    <span>${ele}</span>
+                        <div class="close">
+                            <svg class="icon icon-close" data='${ele}'>
+                                 <use xlink:href="#icon-close"></use>
+                            </svg>
+                        </div>
+                </div>
+            </li>
+            `
+        $('.hotAndHistory .history').append(li)
+        }       
+    })
+}
+
+$('.hotAndHistory .history').on('click','.icon-close',function(e){
+    e.stopPropagation()
+    let key = $(e.currentTarget).attr('data')
+    historyObject[key].haveSearched = false;
+    $(e.currentTarget).parent().parent().parent().remove()
+})
+$('.hotAndHistory .history ').on('click', 'li',function(e){
+    let key = $(e.currentTarget).attr('data')
+    let songInfo = historyObject[key].info
+    showSearchResultPageN(2)
+    $('.searchResultDetail ol').empty();
+    let li = `
+                    <li>
+                        <a href="./song.html?id=${songInfo.id}">
+                                <div class="songInfo">
+                                    <div class="songName">
+                                        <p>${songInfo.attributes.name}</p>
+                                    </div>
+                                    <div class="singer">
+                                        ${songInfo.attributes.singer}-${songInfo.attributes.album}
+                                    </div>
+                                </div>
+                                <div class="play">
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-play"></use>
+                                    </svg>
+                                </div>
+                        </a>
+                    </li>
+    `
+    $('.searchResultDetail ol').append(li);
+    let liSQ = `
+                        <svg class="icon">
+                            <use xlink:href="#icon-SQ"></use>
+                        </svg>
+         `;
+    if (songInfo.attributes.highquality) {
+        $('.searchResultDetail li').find('.singer').prepend(liSQ)
+    }
+
+})
+// $('body').on('click',function(e){
+//     console.log(e.target)
+// })
