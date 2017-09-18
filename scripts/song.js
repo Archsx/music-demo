@@ -60,12 +60,10 @@ function parseLyric(lyric) {
         img.src = coverImgURL;
         document.querySelector('.circle').appendChild(img)
         $(img).attr('class', 'cover')
-        var paddingBottom = parseInt($('.lyricScroll p').css('padding-bottom'))
-        var height = $('.lyricScroll p').height() + paddingBottom;
-        var video = document.createElement('video')
-        video.src = url;
-        document.head.appendChild(video)
-        $('video')[0].addEventListener('ended', function (e) {
+        var audio = document.createElement('audio')
+        audio.src = url;
+        document.head.appendChild(audio)
+        $('audio')[0].addEventListener('ended', function (e) {
             $('.circle').removeClass('playing')
             $('svg.play').removeClass('hide').addClass('show');
             $('.lyricScroll').css({
@@ -74,8 +72,10 @@ function parseLyric(lyric) {
         })
         if (lyric) {
             lrcObj = parseLyric(lyric)
-            $('video')[0].addEventListener('timeupdate', function (e) {
-                var crtTime = parseInt($('video')[0].currentTime);
+            var paddingBottom = parseInt($('.lyricScroll p').css('padding-bottom'))
+            var height = $('.lyricScroll p').height() + paddingBottom;
+            $('audio')[0].addEventListener('timeupdate', function (e) {
+                var crtTime = parseInt($('audio')[0].currentTime);
                 if (lrcObj[crtTime]) {
                     let index = Object.keys(lrcObj).indexOf(crtTime.toString()) - 1;
                     // index = index < 0 ? 0 : index;
@@ -102,19 +102,18 @@ function parseLyric(lyric) {
     })
 })()
 $('svg.play').on('click', function (e) {
-    $('video')[0].play()
-    // $('video').play()
+    $('audio')[0].play()
     $('.circle').removeClass('pause').addClass('playing')
     $('svg.play').addClass('hide')
 })
 // $('img.cover').on('click', function (e) {
-//     $('video')[0].pause();
+//     $('audio')[0].pause();
 //     $('svg.play').removeClass('hide').addClass('show');
 //     $('.circle').addClass('pause')
 
 // })
 $('.circle').on('click', 'img.cover', function (e) {
-    $('video')[0].pause();
+    $('audio')[0].pause();
     $('svg.play').removeClass('hide').addClass('show');
     $('.circle').addClass('pause')
 
